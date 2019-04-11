@@ -1,0 +1,72 @@
+﻿@model EFDbFirstApproachExample.Models.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Edit Product</h2>
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post))
+{
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(temp => temp.ProductName)
+            @Html.HiddenFor(temp => temp.ProductID)
+            @Html.TextBoxFor(temp => temp.ProductName, new { placeholder = "Product Name", @class = "form-control", value = "ProductName" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(temp => temp.Price)
+            @Html.TextBoxFor(temp => temp.Price, new { placeholder = "Price", @class = "form-control", value = "Price" })
+
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(temp => temp.DOP)
+            @Html.TextBoxFor(temp => temp.DOP, new { placeholder = "dd/mm/yyyy", @class = "form-control", value = "DOP" })
+
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(temp => temp.AvailabilityStatus, new { @class = "form-check-label" })
+            <div class="form-check">
+                @Html.RadioButtonFor(temp => temp.AvailabilityStatus, "Instock", new { @class = "form-check-input", id = "InStock" })
+                <label for="Instock" class="form-check-label">In Stock</label>
+            </div>
+
+            <div class="form-check">
+                @Html.RadioButtonFor(temp => temp.AvailabilityStatus, "OutOfstock", new { @class = "form-check-input", id = "OutOfstock" })
+                <label for="OutOfstock" class="form-check-label">Out of Stock</label>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(temp => temp.CategoryID)
+            @Html.DropDownListFor(temp => temp.CategoryID, new SelectList(ViewBag.Categories, "CategoryID", "CategoryName"), "Please Select", new { @class = "form-control"})
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(temp => temp.BrandID)
+            @Html.DropDownListFor(temp => temp.BrandID, new SelectList(ViewBag.Brands, "BrandID", "BrandName"), "Please Select", new { @class = "form-control"})
+            
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            @Html.CheckBoxFor(temp => temp.Active.Value, new { @class = "form-check-input", value = true })
+            @Html.LabelFor(temp => temp.Active, new { @class = "form-check-label" })
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a class="btn btn-danger" href="/products/index">Cancel</a>
+
+
+
+
+
+
+}
+
